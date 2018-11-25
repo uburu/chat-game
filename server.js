@@ -20,8 +20,7 @@ webSocketServer.on('connection', function(ws) {
   });
 
   ws.on('close', function() {
-    console.log('соединение закрыто ' + id);
-    delete clients[id];
+    console.log('соединение закрыто ' );
   });
 
 });

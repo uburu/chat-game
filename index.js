@@ -3,7 +3,9 @@ if (!window.WebSocket) {
 }
 
 // создать подключение
-var socket = new WebSocket("ws://80.252.155.65:5002/chats/1234/websocket");
+var socket = new WebSocket("ws://80.252.155.65:4999");
+
+socket.send("kek");
 
 // отправить сообщение из формы publish
 document.forms.publish.onsubmit = function() {
