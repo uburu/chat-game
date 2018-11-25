@@ -1,32 +1,32 @@
 var http = require('http');
 var Static = require('node-static');
-// var WebSocketServer = new require('ws');
+var WebSocketServer = new require('ws');
 
-// // подключенные клиенты
-// var clients = {};
+import fetchModule from "./ajax.js"
 
-// // WebSocket-сервер на порту 8081
-// var webSocketServer = new WebSocketServer.Server({port: 8081});
-// webSocketServer.on('connection', function(ws) {
+// подключенные клиенты
+var clients = {};
 
-//   var id = Math.random();
-//   clients[id] = ws;
-//   console.log("новое соединение " + id);
+// WebSocket-сервер на порту 4999
+var webSocketServer = new WebSocketServer.Server({port: 4999});
+webSocketServer.on('connection', function(ws) {
 
-//   ws.on('message', function(message) {
-//     console.log('получено сообщение ' + message);
+  ws.on('message', function(message) {
+    console.log('получено сообщение ' + message);
 
-//     for(var key in clients) {
-//       clients[key].send(message);
-//     }
-//   });
+    // fetchModule.doGet("/chats", {idfrom: message.idfrom, idto: message.idto, authtoken:message.authtoken})
 
-//   ws.on('close', function() {
-//     console.log('соединение закрыто ' + id);
-//     delete clients[id];
-//   });
+    // for(var key in clients) {
+    //   clients[key].send(message);
+    // }
+  });
 
-// });
+  ws.on('close', function() {
+    console.log('соединение закрыто ' + id);
+    delete clients[id];
+  });
+
+});
 
 
 // обычный сервер (статика) на порту 8080
@@ -37,5 +37,4 @@ http.createServer(function (req, res) {
 
 }).listen(5000);
 
-console.log("Сервер запущен на портах 8080, 8081");
-
+console.log("Сервер запущен на портах front: 5000, back: 4999");
