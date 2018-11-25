@@ -40,7 +40,7 @@ http.createServer(function (req, res) {
   
   fileServer.serve(req, res);
 
-}).listen(8080);
+}).listen(5000);
 
 // console.log("Сервер запущен на портах 8080, 8081");
 
