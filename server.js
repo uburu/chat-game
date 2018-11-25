@@ -2,25 +2,29 @@ var http = require('http');
 var Static = require('node-static');
 var WebSocketServer = new require('ws');
 
+
 // подключенные клиенты
 var clients = {};
 
-// WebSocket-сервер на порту 4999
+// WebSocket-сервер на порту 8081
 var webSocketServer = new WebSocketServer.Server({port: 4999});
 webSocketServer.on('connection', function(ws) {
+
+  var id = Math.random();
+  clients[id] = ws;
+  console.log("новое соединение " + id);
 
   ws.on('message', function(message) {
     console.log('получено сообщение ' + message);
 
-    // fetchModule.doGet("/chats", {idfrom: message.idfrom, idto: message.idto, authtoken:message.authtoken})
-
-    // for(var key in clients) {
-    //   clients[key].send(message);
-    // }
+    for(var key in clients) {
+      clients[key].send(message);
+    }
   });
 
   ws.on('close', function() {
-    console.log('соединение закрыто ' );
+    console.log('соединение закрыто ' + id);
+    delete clients[id];
   });
 
 });
@@ -34,4 +38,5 @@ http.createServer(function (req, res) {
 
 }).listen(5000);
 
-console.log("Сервер запущен на портах front: 5000, back: 4999");
+console.log("Сервер запущен на портах 5000");
+
