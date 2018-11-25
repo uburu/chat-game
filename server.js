@@ -2,8 +2,6 @@ var http = require('http');
 var Static = require('node-static');
 var WebSocketServer = new require('ws');
 
-import fetchModule from "./ajax.js"
-
 // подключенные клиенты
 var clients = {};
 
