@@ -5,11 +5,15 @@ if (!window.WebSocket) {
 // создать подключение
 var socket = new WebSocket("ws://80.252.155.65:4999");
 
+// make_private_chat = {
+//   type: 'make_private_chat',
+//   data: [1,2],
+// }
 
-socket.onopen = function() {
-  alert("Соединение установлено.");
-  socket.send("kek");
-};
+// get_chats = {
+//   type: 'get_chats',
+//   data: 1,
+// }
 
 
 
