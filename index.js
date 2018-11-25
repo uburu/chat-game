@@ -12,7 +12,7 @@ var ID = randomIntFromInterval(0,500)
 var CHAT_ID = "";
 
 // создать подключение
-var socket = new WebSocket("ws://80.252.155.65:5003");
+var socket = new WebSocket("ws://80.252.155.65:5002/chats/1234/websocket");
 
 function auth(){
   data = {
@@ -31,8 +31,10 @@ socket.onopen = function(){
 
 function make_chat(){
   data = {
-    type: 'make_chat',
-    data: ID
+    type: 'make_private_chat',
+    data: {
+      profile_id: ID,
+    }
   }
   return JSON.stringify(data);
 };
@@ -70,9 +72,10 @@ document.forms.make_chat.onsubmit = function() {
 function proxy(msg){
   data = JSON.parse(msg);
   switch (data.type){
-    case "make_chat":
-      CHAT_ID = data.data;
-      document.getElementById("chat_id_hidden") = CHAT_ID;
+    case "make_private_chat":
+      CHAT_ID = data.data.chat_id;
+      console.log(CHAT_ID);
+      document.getElementById("chat_id_hidden").value = CHAT_ID;
       showMessage("Это ID твоего чата: " + CHAT_ID + " вставь его в поле присоединиться, чтобы початиться", "chat_id")
       break;
     case "post_msg":
@@ -88,6 +91,7 @@ function proxy(msg){
 // обработчик входящих сообщений
 socket.onmessage = function(event) {
   var incomingMessage = event.data;
+  console.log(incomingMessage);
   proxy(incomingMessage);
 };
 
