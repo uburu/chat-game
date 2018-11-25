@@ -4,7 +4,7 @@ var WebSocketServer = new require('ws');
 
 
 // создать подключение
-var socket = new WebSocket("ws://80.252.155.65:4999");
+var socket = new WebSocketServer("ws://80.252.155.65:4999");
 
 function make_private_chat(input){
   type = 'make_private_chat';
