@@ -5,14 +5,27 @@
 </head>
 <body>
 
+<form name="make_chat">
+  <input type="submit" value="Создать чат"/>
+</form>
+
+<div id="chat_id"></div>
+
+<br>
+<br>
+
+
 <!-- форма для отправки сообщений -->
 <form name="publish">
+  <input type="hidden" id="chat_id_hidden" name="chat_id"/>
   <input type="text" name="message"/>
   <input type="submit" value="Отправить"/>
 </form>
 
+
+
 <!-- здесь будут появляться входящие сообщения -->
-<div id="subscribe"></div>
+
 
 <script src="index.js"></script>
 
